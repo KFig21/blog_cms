@@ -1,0 +1,102 @@
+@import "../../global.scss";
+
+.post-container {
+  width: 250px;
+  min-width: 250px;
+  max-width: 250px;
+  padding: 20px 15px;
+  border-radius: 20px;
+  min-height: 290px;
+  max-height: 290px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+
+  @include mobile {
+    width: 90%;
+    min-width: 90%;
+    max-width: 90%;
+  }
+}
+
+.post-container-title {
+  font-size: 18px;
+  font-weight: 700;
+  height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.post-container-description {
+  height: 115px;
+  min-height: 115px;
+  max-height: 115px;
+  padding: 5px 5px 10px 5px;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+}
+
+.post-container-author {
+  font-size: 14px;
+  height: 30px;
+  padding-top: 8px;
+  font-weight: 700;
+}
+.post-container-submitted {
+  height: 24px;
+  font-size: 14px;
+  font-weight: 100;
+  color: gray;
+  font-style: italic;
+}
+
+.edit-post-container {
+  height: 30px;
+  min-height: 30px;
+  max-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  button {
+    background-color: $primaryColor;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 5px 15px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $primaryColorFaded;
+      color: white;
+    }
+  }
+
+  .comment-count-container {
+    position: absolute;
+    right: 0px;
+    top: 3.5px;
+    display: flex;
+    align-items: flex-start;
+    transition: all 0.15s ease;
+
+    .comment-count {
+      margin-left: 2.5px;
+    }
+
+    .comment-icon-container {
+      padding-top: 1.5px;
+    }
+
+    &:hover {
+      transform: scale(1.12);
+    }
+  }
+}

@@ -1,0 +1,135 @@
+@import "../../global.scss";
+
+.navbar {
+  background-color: $navbarColor;
+  height: 80px;
+  display: flex;
+  width: 100%;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(1.5px);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-container {
+  display: flex;
+  width: 100%;
+  max-width: 800px;
+  align-items: center;
+  justify-content: space-between;
+
+  @include mobile {
+    width: 95%;
+  }
+}
+
+.nav-link-container {
+  button {
+    background-color: $primaryColor;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    font-size: 14px;
+    padding: 12px 15px;
+    margin-left: 15px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $primaryColorFaded;
+      color: white;
+    }
+
+    @include mobile {
+      padding: 9px 12px;
+      margin-left: 10px;
+    }
+  }
+
+  .logout-button {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+  }
+}
+
+.nav-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-title {
+  color: white;
+  font-size: 30px;
+  margin-left: 20px;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.navbar-svg {
+  max-height: 40px;
+  max-width: 40px;
+  border-radius: 50%;
+  background-color: $primaryColor;
+  background-size: 200% 200%;
+
+  .navbar-svg-g {
+    fill: $navbarColor;
+  }
+
+  &:hover {
+    background: linear-gradient(
+      130deg,
+      $primaryColor,
+      $primaryColor,
+      $primaryColor,
+      $primaryColor,
+      #97e7f5,
+      $primaryColor,
+      $primaryColor,
+      $primaryColor,
+      $primaryColor
+    );
+    -webkit-animation: animated-logo 2.8s ease infinite;
+    -moz-animation: animated-logo 2.8s ease infinite;
+    animation: animated-logo 2.8s ease infinite;
+    background-size: 275% 275%;
+    height: 300px;
+    width: 300px;
+
+    @-webkit-keyframes animated-logo {
+      0% {
+        background-position: 96% 100%;
+      }
+
+      100% {
+        background-position: 5% 0%;
+      }
+    }
+    @-moz-keyframes animated-logo {
+      0% {
+        background-position: 96% 100%;
+      }
+
+      100% {
+        background-position: 5% 0%;
+      }
+    }
+    @keyframes animated-logo {
+      0% {
+        background-position: 96% 100%;
+      }
+
+      100% {
+        background-position: 5% 0%;
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+@import "../../global.scss";
+
+.comments-container {
+  width: 100%;
+  max-width: 1000px;
+  padding: 25px 35px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+
+  @include mobile {
+    padding: 25px 25px;
+  }
+}
+
+.comments-header {
+  font-size: 30px;
+  text-align: left;
+  padding-bottom: 20px;
+}
+
+.comment-container {
+  border-top: 1px solid rgb(202, 202, 202);
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+
+  .comment-name {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .comment-text {
+    text-align: left;
+    font-size: 16px;
+    padding: 10px 0px;
+  }
+  .comment-date {
+    text-align: left;
+    font-size: 16px;
+    font-weight: 100;
+    color: gray;
+    font-style: italic;
+  }
+}
+
+.comment-delete-button {
+  background-color: $primaryColor;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 7px 15px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  width: 100px;
+  margin: 15px auto 5px auto;
+  color: white;
+
+  &:hover {
+    background-color: crimson;
+  }
+}

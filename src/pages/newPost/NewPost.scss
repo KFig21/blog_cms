@@ -1,0 +1,126 @@
+@import "../../global.scss";
+
+.layout {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: auto;
+  padding: 0px 10px 50px 10px;
+
+  @include mobile {
+    padding: 0px 15px 30px 15px;
+  }
+}
+
+.new-container {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 30px 0px;
+}
+
+.new-form {
+  width: 100%;
+  max-width: 1000px;
+  padding: 25px 35px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+
+  @include mobile {
+    padding: 25px 16px;
+  }
+
+  button {
+    background-color: $primaryColor;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 7px 15px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    width: 100px;
+    margin: 5px auto;
+    color: white;
+
+    &:hover,
+    &:focus {
+      background-color: $primaryColorFaded;
+    }
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  font-size: 36px;
+  width: 100%;
+  text-align: left;
+
+  label {
+    color: rgb(180, 180, 180);
+  }
+
+  &:focus-within {
+    label {
+      color: black;
+    }
+  }
+}
+
+.new-form-input {
+  background-color: transparent;
+  border: none;
+  border-bottom: solid 1px black;
+  outline: none;
+  padding: 7px 12px;
+  margin: 10px auto 11px auto;
+  border-radius: 0px;
+  width: 96%;
+  font-size: 16px;
+
+  &:focus {
+    background-color: $formInputFocusColor;
+    border-bottom: solid 2px $primaryColor;
+    margin: 10px auto;
+  }
+}
+.title {
+  font-size: 30px;
+}
+.author {
+  font-size: 20px;
+}
+
+.body {
+  width: 96%;
+  max-width: 96%;
+  min-width: 96%;
+  height: 200px;
+
+  &:focus {
+    margin-bottom: 11px;
+  }
+}
+
+.description {
+  width: 96%;
+  max-width: 96%;
+  min-width: 96%;
+  height: 60px;
+
+  &:focus {
+    margin-bottom: 11px;
+  }
+}

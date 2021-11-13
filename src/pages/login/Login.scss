@@ -1,0 +1,58 @@
+@import "../../global.scss";
+
+.login-container {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 30px 10px;
+}
+
+.login-form {
+  width: 300px;
+  min-width: 300px;
+  max-width: 300px;
+  padding: 15px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+
+  button {
+    background-color: $primaryColor;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 7px 15px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    width: 100px;
+    margin: 5px auto;
+    color: white;
+
+    &:hover,
+    &:focus {
+      background-color: $primaryColorFaded;
+    }
+  }
+}
+
+.form-input {
+  background-color: white;
+  border: none;
+  border-bottom: solid 2px $formInputColor;
+  outline: none;
+  padding: 7px 12px;
+  margin: 5px 0px;
+  width: 90%;
+  font-size: 16px;
+  transition: all 0.15s ease;
+
+  &:focus {
+    background-color: $formInputFocusColor;
+    border-bottom: solid 2px $primaryColor;
+  }
+}

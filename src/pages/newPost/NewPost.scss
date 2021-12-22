@@ -56,71 +56,76 @@
       background-color: $primaryColorFaded;
     }
   }
-}
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group {
-  font-size: 36px;
-  width: 100%;
-  text-align: left;
-
-  label {
-    color: rgb(180, 180, 180);
+  .form-group {
+    display: flex;
+    flex-direction: column;
   }
 
-  &:focus-within {
+  .form-group {
+    font-size: 36px;
+    width: 100%;
+    text-align: left;
+
     label {
-      color: black;
+      color: rgb(180, 180, 180);
+    }
+
+    &:focus-within {
+      label {
+        color: black;
+      }
+    }
+  }
+
+  .new-form-input {
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 1px black;
+    outline: none;
+    padding: 7px 12px;
+    margin: 10px auto 11px auto;
+    border-radius: 0px;
+    width: 96%;
+    font-size: 16px;
+
+    &:focus {
+      background-color: $formInputFocusColor;
+      border-bottom: solid 2px $primaryColor;
+      margin: 10px auto;
+    }
+  }
+  .title {
+    font-size: 30px;
+  }
+  .author {
+    font-size: 20px;
+  }
+
+  .body {
+    width: 96%;
+    max-width: 96%;
+    min-width: 96%;
+    height: 200px;
+
+    &:focus {
+      margin-bottom: 11px;
+    }
+  }
+
+  .description {
+    width: 96%;
+    max-width: 96%;
+    min-width: 96%;
+    height: 60px;
+
+    &:focus {
+      margin-bottom: 11px;
     }
   }
 }
 
-.new-form-input {
-  background-color: transparent;
-  border: none;
-  border-bottom: solid 1px black;
-  outline: none;
-  padding: 7px 12px;
-  margin: 10px auto 11px auto;
-  border-radius: 0px;
-  width: 96%;
-  font-size: 16px;
-
-  &:focus {
-    background-color: $formInputFocusColor;
-    border-bottom: solid 2px $primaryColor;
-    margin: 10px auto;
-  }
-}
-.title {
-  font-size: 30px;
-}
-.author {
-  font-size: 20px;
-}
-
-.body {
-  width: 96%;
-  max-width: 96%;
-  min-width: 96%;
-  height: 200px;
-
-  &:focus {
-    margin-bottom: 11px;
-  }
-}
-
-.description {
-  width: 96%;
-  max-width: 96%;
-  min-width: 96%;
-  height: 60px;
-
-  &:focus {
-    margin-bottom: 11px;
-  }
+.test-account-message {
+  color: crimson;
+  font-weight: 600;
 }

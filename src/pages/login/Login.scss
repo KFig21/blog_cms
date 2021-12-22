@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
   margin: auto;
-  padding: 30px 10px;
+  padding: 30px 10px 10px 10px;
 }
 
 .login-form {
@@ -54,5 +54,27 @@
   &:focus {
     background-color: $formInputFocusColor;
     border-bottom: solid 2px $primaryColor;
+  }
+}
+
+.just-visiting {
+  button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 7px 15px;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    margin: 5px auto 5px 6px;
+    color: white;
+    border: solid 2px white;
+
+    &:hover,
+    &:focus {
+      background-color: white;
+      color: $navbarColor;
+    }
   }
 }

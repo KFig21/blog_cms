@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../context/AuthContext";
 import "./EditPost.scss";
 // components
 import Loader from "../../components/loader/Loader";
@@ -15,6 +16,7 @@ export default function EditPost() {
   const [showDeletePostModal, setShowDeletePostModal] = useState(false);
   const [showDeleteCommentModal, setShowDeleteCommentModal] = useState(false);
   const [commentToDelete, setCommentToDelete] = useState(null);
+  const { user, dispatch } = useContext(AuthContext);
 
   const { register, handleSubmit, errors } = useForm();
   let navigate = useNavigate();
@@ -25,6 +27,7 @@ export default function EditPost() {
       try {
         const postReq = await fetch(
           `https://still-atoll-78147.herokuapp.com/api/posts/${id}`
+          // `http://localhost:3000/api/posts/${id}`
         );
         if (postReq.status !== 200) {
           return;
@@ -52,76 +55,88 @@ export default function EditPost() {
   }, []);
 
   const submitForm = async (data) => {
-    const token = localStorage.getItem("token");
-    const bearer = `Bearer ${token}`;
-    const formData = JSON.stringify(data);
-    try {
-      const req = await fetch(
-        `https://still-atoll-78147.herokuapp.com/api/posts/${id}`,
-        {
-          method: "PUT",
-          body: formData,
-          headers: {
-            Authorization: bearer,
-            "Content-Type": "application/json",
-          },
+    if (user.isAdmin) {
+      const token = localStorage.getItem("token");
+      const bearer = `Bearer ${token}`;
+      const formData = JSON.stringify(data);
+      try {
+        const req = await fetch(
+          `https://still-atoll-78147.herokuapp.com/api/posts/${id}`,
+          {
+            method: "PUT",
+            body: formData,
+            headers: {
+              Authorization: bearer,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (req.status !== 200) {
+          return;
         }
-      );
-      if (req.status !== 200) {
-        return;
-      }
-      setSuccessMsg(true);
-    } catch (err) {}
+        setSuccessMsg(true);
+      } catch (err) {}
+    } else {
+      console.log("User does not have admin privileges to edit a post");
+    }
   };
 
   const deletePost = async () => {
-    const token = localStorage.getItem("token");
-    const bearer = `Bearer ${token}`;
-    try {
-      const req = await fetch(
-        `https://still-atoll-78147.herokuapp.com/api/posts/${id}`,
-        {
-          method: "delete",
-          headers: {
-            Authorization: bearer,
-            "Content-Type": "application/json",
-          },
+    if (user.isAdmin) {
+      const token = localStorage.getItem("token");
+      const bearer = `Bearer ${token}`;
+      try {
+        const req = await fetch(
+          `https://still-atoll-78147.herokuapp.com/api/posts/${id}`,
+          {
+            method: "delete",
+            headers: {
+              Authorization: bearer,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (req.status !== 200) {
+          return;
         }
-      );
-      if (req.status !== 200) {
-        return;
+        await deleteAllComments();
+        navigate("/posts");
+      } catch (err) {
+        console.error(err);
       }
-      await deleteAllComments();
-      navigate("/posts");
-    } catch (err) {
-      console.error(err);
+    } else {
+      console.log("User does not have admin privileges to delete a post");
     }
   };
 
   const deleteComment = async (commentId) => {
-    const token = localStorage.getItem("token");
-    const bearer = `Bearer ${token}`;
-    try {
-      const req = await fetch(
-        `https://still-atoll-78147.herokuapp.com/api/posts/${id}/comments/${commentId}`,
-        {
-          method: "delete",
-          headers: {
-            Authorization: bearer,
-            "Content-Type": "application/json",
-          },
+    if (user.isAdmin) {
+      const token = localStorage.getItem("token");
+      const bearer = `Bearer ${token}`;
+      try {
+        const req = await fetch(
+          `https://still-atoll-78147.herokuapp.com/api/posts/${id}/comments/${commentId}`,
+          {
+            method: "delete",
+            headers: {
+              Authorization: bearer,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (req.status !== 200) {
+          return;
         }
-      );
-      if (req.status !== 200) {
-        return;
+        const newComments = comments.filter(
+          (comment) => comment._id !== commentId
+        );
+        setComments(newComments);
+        setShowDeleteCommentModal(false);
+      } catch (err) {
+        console.error(err);
       }
-      const newComments = comments.filter(
-        (comment) => comment._id !== commentId
-      );
-      setComments(newComments);
-      setShowDeleteCommentModal(false);
-    } catch (err) {
-      console.error(err);
+    } else {
+      console.log("User does not have admin privileges to delete a comment");
     }
   };
 
@@ -145,26 +160,30 @@ export default function EditPost() {
   };
 
   const deleteAllComments = async () => {
-    const token = localStorage.getItem("token");
-    const bearer = `Bearer ${token}`;
-    try {
-      const req = await fetch(
-        `https://still-atoll-78147.herokuapp.com/api/posts/${id}/comments`,
-        {
-          method: "delete",
-          headers: {
-            Authorization: bearer,
-            "Content-Type": "application/json",
-          },
+    if (user.isAdmin) {
+      const token = localStorage.getItem("token");
+      const bearer = `Bearer ${token}`;
+      try {
+        const req = await fetch(
+          `https://still-atoll-78147.herokuapp.com/api/posts/${id}/comments`,
+          {
+            method: "delete",
+            headers: {
+              Authorization: bearer,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (req.status !== 200) {
+          return;
         }
-      );
-      if (req.status !== 200) {
-        return;
+        setComments();
+        setShowDeleteCommentModal(false);
+      } catch (err) {
+        console.error(err);
       }
-      setComments();
-      setShowDeleteCommentModal(false);
-    } catch (err) {
-      console.error(err);
+    } else {
+      console.log("User does not have admin privileges to delete all comments");
     }
   };
 
@@ -174,6 +193,11 @@ export default function EditPost() {
         <>
           <div className="edit-container">
             <div className="edit-form">
+              {!user.isAdmin && (
+                <div className="test-account-message">
+                  USER DOES NOT HAVE ADMIN PRIVILEGES TO EDIT/DELETE POST
+                </div>
+              )}
               {/* title */}
               <div className="form-group">
                 <label className="form-label" htmlFor="title">
@@ -243,6 +267,11 @@ export default function EditPost() {
               >
                 Delete
               </button>
+              {!user.isAdmin && (
+                <div className="test-account-message">
+                  USER DOES NOT HAVE ADMIN PRIVILEGES TO EDIT/DELETE POST
+                </div>
+              )}
             </div>
           </div>
           {comments ? (

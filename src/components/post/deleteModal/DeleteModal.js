@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../context/AuthContext";
 import "./DeleteModal.scss";
 
 export default function DeleteModal({ post, handleCancelPost, deletePost }) {
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="shade">
       <div className="delete-modal-container">
@@ -11,6 +14,12 @@ export default function DeleteModal({ post, handleCancelPost, deletePost }) {
         <span className="post-title">{post.title}</span>
         <span className="post-author">{post.author}</span>
         <span className="post-date">Submitted: {post.submitted}</span>
+
+        {!user.isAdmin && (
+          <div className="test-account-message">
+            USER DOES NOT HAVE ADMIN PRIVILEGES TO DELETE POST
+          </div>
+        )}
         <div className="buttons-container">
           <button className="delete-button" onClick={() => deletePost()}>
             Delete

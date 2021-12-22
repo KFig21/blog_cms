@@ -1,40 +1,53 @@
-import { useState, React } from "react";
+import { useState, React, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../context/AuthContext";
 import "./NewPost.scss";
 
 export default function NewPost() {
   const [successMsg, setSuccessMsg] = useState(false);
   const { register, handleSubmit } = useForm();
+  const { user } = useContext(AuthContext);
   let navigate = useNavigate();
 
+  console.log(user);
+
   const submitForm = async (data) => {
-    const token = localStorage.getItem("token");
-    const bearer = `Bearer ${token}`;
-    const formData = JSON.stringify(data);
-    try {
-      const req = await fetch(
-        `https://still-atoll-78147.herokuapp.com/api/posts/`,
-        {
-          method: "post",
-          body: formData,
-          headers: {
-            Authorization: bearer,
-            "Content-Type": "application/json",
-          },
+    if (user.isAdmin) {
+      const token = localStorage.getItem("token");
+      const bearer = `Bearer ${token}`;
+      const formData = JSON.stringify(data);
+      try {
+        const req = await fetch(
+          `https://still-atoll-78147.herokuapp.com/api/posts/`,
+          {
+            method: "post",
+            body: formData,
+            headers: {
+              Authorization: bearer,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (req.status !== 200) {
+          return;
         }
-      );
-      if (req.status !== 200) {
-        return;
-      }
-      navigate("/posts");
-      setSuccessMsg(true);
-    } catch (err) {}
+        navigate("/posts");
+        setSuccessMsg(true);
+      } catch (err) {}
+    } else {
+      console.log("test account cannot send a post");
+    }
   };
   return (
     <div className="layout">
       <div className="new-container">
         <div className="new-form">
+          {!user.isAdmin && (
+            <div className="test-account-message">
+              USER DOES NOT HAVE ADMIN PRIVILEGES TO SUBMIT POST
+            </div>
+          )}
           {/* title */}
           <div className="form-group">
             <label className="form-label" htmlFor="title">
@@ -80,6 +93,11 @@ export default function NewPost() {
           >
             Submit
           </button>
+          {!user.isAdmin && (
+            <div className="test-account-message">
+              USER DOES NOT HAVE ADMIN PRIVILEGES TO SUBMIT POST
+            </div>
+          )}
           {successMsg && <span>Submited successfully!</span>}
         </div>
       </div>

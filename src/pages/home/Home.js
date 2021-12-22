@@ -9,7 +9,8 @@ export default function Home() {
     const getPosts = async () => {
       try {
         const req = await fetch(
-          "https://still-atoll-78147.herokuapp.com/api/posts"
+          // "https://still-atoll-78147.herokuapp.com/api/posts"
+          "http://localhost:3000/api/posts"
         );
         if (req.status !== 200) {
         }

@@ -251,8 +251,17 @@ export default function EditPost() {
               {successMsg && <span>Updated successfully!</span>}
 
               <div>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={
+                    "https://kfig21.github.io/blog_client/#/posts/" + post.id
+                  }
+                >
+                  <button className="update-button">View</button>
+                </a>
                 <button
-                  className="update-button"
+                  className="update-button center"
                   type="submit"
                   onClick={
                     ((e) => e.preventDefault(), handleSubmit(submitForm))
@@ -260,13 +269,13 @@ export default function EditPost() {
                 >
                   Update
                 </button>
+                <button
+                  className="delete-button"
+                  onClick={() => handleDeletePost()}
+                >
+                  Delete
+                </button>
               </div>
-              <button
-                className="delete-button"
-                onClick={() => handleDeletePost()}
-              >
-                Delete
-              </button>
               {!user.isAdmin && (
                 <div className="test-account-message">
                   USER DOES NOT HAVE ADMIN PRIVILEGES TO EDIT/DELETE POST

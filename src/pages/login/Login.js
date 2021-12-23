@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 export default function Login({ setUserAuth }) {
   const { register, handleSubmit, errors } = useForm();
   const [loginErr, setLoginErr] = useState(false);
-  const { isFetching, dispatch } = useContext(AuthContext);
+  const { dispatch } = useContext(AuthContext);
 
   const onSubmit = async (data) => {
     console.log(data);

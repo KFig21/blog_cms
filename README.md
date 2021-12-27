@@ -18,6 +18,24 @@
   <li>MERN stack CRUD application</li>
  </ul>
 
+<h3>Screenshots</h3>
+
+<h4>Home screen</h4>
+
+![](screenshot-1.PNG)
+
+<h4>New post screen</h4>
+
+![](screenshot-2.PNG)
+
+<h4>Edit post screen</h4>
+
+![](screenshot-3.PNG)
+
+<h4>Delete modal</h4>
+
+![](screenshot-4.PNG)
+
 ---
 
 <h3>Thanks for checking out my project! Any && all feedback is appreciated!</h3>
